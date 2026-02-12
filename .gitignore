@@ -1,0 +1,46 @@
+#staticfiles and conf.py #
+*/longtermtrends/conf.py
+/ssh
+/longtermtrends/staticfiles
+
+# Django files #
+*.pyc
+
+# videos
+*.mp4
+
+# OS generated files #
+######################
+.DS_Store
+
+.vscode/
+.idea/
+db.sqlite3
+
+stooq_requests.log
+
+CMD/
+
+credentials.json
+
+.Rhistory
+
+docker-mount/
+.env
+venv
+.venv
+*.log
+*.log.*
+longtermtrends/community/discord/bot_config.py
+
+
+downloads/
+*research_all_topics.json
+longtermtrends/community/api_service/data_urls_by_folder.txt
+
+
+.tmp/
+
+transcripts.jsonl
+
+diff
