@@ -1,0 +1,23 @@
+{
+  "name": "Test User",
+  "age": 45,
+  "region": "US",
+  "esg_preference": false,
+  "goals": {
+    "liquidity": "6 months",
+    "longevity": "Retirement at 65"
+  },
+  "wealth_context": {
+    "housing_status": "own", 
+    "risk_profile": "aggressive",
+    "income_stability": "stable",
+    "has_high_interest_debt": false
+  },
+  "allocation": {
+    "strategy": "LIFECYCLE_V2",
+    "equity_pct": 80,
+    "bonds_pct": 20,
+    "housing_adjustment": true,
+    "fun_bucket_pct": 0
+  }
+}
