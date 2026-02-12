@@ -1,0 +1,294 @@
+{% extends "community/base.html" %}
+{% load static %}
+
+{% block title %}Car Affordability Agent | LongtermTrends{% endblock %}
+
+{% block description %}
+Discover how much car you can realistically afford. Uses the 10% Rule, Total Cost of Ownership (TCO), and Opportunity Cost analysis. Free, unbiased, and educational.
+{% endblock %}
+
+{% block image %}
+<meta property="og:image" content="{% static 'my_app/images/agents/car-agent-v1.png' %}">
+{% endblock %}
+
+{% block extra_head %}
+<!-- Animate.css library for animations -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<!-- Intersection Observer polyfill for better browser support -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intersection-observer/1.0.0/intersection-observer.min.js"></script>
+<!-- Custom animation styles -->
+<link rel="stylesheet" href="{% static 'my_app/js/landing-page/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Header -->
+<div class="text-xs flex w-full items-center justify-between mt-2 px-2 md:px-8 lg:px-8 xl:px-8 2xl:px-8 sticky top-0 bg-white z-50">
+  <div class="w-full">
+    {% include 'community/components/global-header.html'%}
+  </div>
+</div>
+
+<!-- Hero Section -->
+<section class="py-16 md:py-24 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-6xl text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6 animate__animated animate__fadeIn">
+            Car <span class="text-blue-600">Affordability Agent</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed animate__animated animate__fadeIn animate__delay-1s">
+            Your personal coach to determine <span class="font-semibold text-gray-800">how much car</span> you can realistically afford.
+            <br class="hidden md:block">
+            Built on the <span class="font-semibold text-gray-800">10% Rule</span> and <span class="font-semibold text-gray-800">Total Cost of Ownership</span>. Avoid financial pitfalls and build wealth instead.
+        </p>
+        
+        <!-- CTA Button -->
+        <div class="animate__animated animate__fadeIn animate__delay-2s">
+            <button onclick="handleHeroClick()" class="inline-flex items-center px-8 py-4 bg-blue-600 text-white text-lg font-bold rounded-full shadow-lg hover:bg-blue-700 hover:shadow-xl transition transform hover:-translate-y-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                Check My Affordability
+            </button>
+        </div>
+    </div>
+</section>
+
+
+<!-- How It Works (3 Cards) -->
+<section class="py-16 bg-white fade-in-section">
+    <div class="container mx-auto px-4 max-w-6xl">
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">How It Works</h2>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Card 1: Discovery -->
+            <div class="bg-gray-50 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100 flex flex-col">
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6 text-blue-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z" /></svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-4">1. Gather Financials</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    The agent collects key financial inputs through a guided conversation:
+                </p>
+                <ul class="space-y-3 text-sm text-gray-600 border-t border-gray-200 pt-4 mt-auto">
+                    <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></span>Annual Net Income</li>
+                    <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></span>Annual Expenses</li>
+                    <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></span>Current Investments (optional)</li>
+                    <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></span>Desired Car Budget</li>
+                </ul>
+            </div>
+
+            <!-- Card 2: Logic -->
+            <div class="bg-gray-50 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100 flex flex-col">
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6 text-blue-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-4">2. Deep Analysis</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    Uses proven financial frameworks to calculate true affordability:
+                </p>
+                <ul class="space-y-3 text-sm text-gray-600 border-t border-gray-200 pt-4 mt-auto">
+                    <li class="flex items-start"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0 mt-1.5"></span><span><strong>10% Rule:</strong> Transport costs < 10% of net income.</span></li>
+                    <li class="flex items-start"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0 mt-1.5"></span><span><strong>TCO:</strong> Fuel, Insurance, Maintenance, Depreciation.</span></li>
+                    <li class="flex items-start"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0 mt-1.5"></span><span><strong>Opportunity Cost:</strong> Lost investment growth.</span></li>
+                </ul>
+            </div>
+
+             <!-- Card 3: Output -->
+             <div class="bg-gray-50 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100 flex flex-col">
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6 text-blue-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-4">3. Your Affordability Report</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    Receive a personalized <strong>Affordability Report</strong> with clear guidance:
+                </p>
+                <ul class="space-y-3 text-sm text-gray-600 border-t border-gray-200 pt-4 mt-auto">
+                    <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></span>Affordable / Stretch / Unaffordable</li>
+                    <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></span>Max Affordable Budget</li>
+                    <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></span>Investment Impact (Scenario Analysis)</li>
+                    <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></span>Comparison of Car Classes</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Video / Philosophy Section -->
+<section class="py-16 bg-gray-50 fade-in-section">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8">Understanding True Cost</h2>
+        <p class="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
+            Most people underestimate the true cost of owning a car. See the math behind the decision.
+        </p>
+        
+        <div class="bg-white rounded-xl shadow-sm inline-block text-left w-full border border-gray-100 overflow-hidden">
+            <div class="flex flex-col">
+                <!-- YouTube Video Embed -->
+                <div class="relative w-full h-0 pb-[56.25%]">
+                    <iframe 
+                        src="https://www.youtube.com/embed/zAQoSQiozaA" 
+                        title="How Much Car Can You Afford?" 
+                        class="absolute top-0 left-0 w-full h-full" 
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">How Much Car Can You Afford?</h3>
+                    <p class="text-gray-500 mb-4 font-medium">by Humphrey Yang</p>
+                    <p class="text-gray-600 italic">"$30K vs $75K vs $265K Supercar - The breakdown of what you can actually afford based on your income."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Disclaimer & Development Note -->
+<section class="py-12 bg-white fade-in-section">
+    <div class="container mx-auto px-4 max-w-4xl space-y-6">
+         <!-- Development Note -->
+         <div class="rounded-xl border border-yellow-200 bg-yellow-50 p-6 md:p-8">
+            <div class="flex items-start">
+               <div class="flex-shrink-0">
+                  <svg class="h-6 w-6 text-yellow-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+               </div>
+               <div class="ml-4">
+                  <p class="text-sm text-yellow-800">
+                     <strong>Note:</strong> This agent is under continuous development. Data, methodologies, and results are subject to change.
+                  </p>
+               </div>
+            </div>
+         </div>
+
+         <!-- Legal Disclaimer -->
+         <div class="rounded-xl border border-yellow-200 bg-yellow-50 p-6 md:p-8">
+            <div class="flex items-start">
+               <div class="flex-shrink-0">
+                  <svg class="h-6 w-6 text-yellow-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+               </div>
+               <div class="ml-4">
+                  <h3 class="text-lg font-bold text-yellow-800 mb-2">Legal Disclaimer</h3>
+                  <div class="text-sm text-yellow-800 space-y-3 leading-relaxed">
+                     <p><strong>Important Disclaimer: For Educational and Informational Purposes Only.</strong></p>
+                     <p>The information and affordability reports provided by this tool, including any analysis, commentary, or potential scenarios, are generated by an AI model and are for educational and informational purposes only. They do not constitute, and should not be interpreted as, financial advice, investment recommendations, endorsements, or offers to buy or sell any vehicles, securities, or other financial instruments.</p>
+                     <p>LongtermTrends and its affiliates make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability with respect to the information provided. Any reliance you place on such information is therefore strictly at your own risk.</p>
+                     <p>Financial decisions should not be made based solely on the information provided here. Individual financial situations vary, and past performance is not indicative of future results. You should conduct your own thorough research and consult with a qualified independent financial advisor before making any major financial decisions.</p>
+                     <p>By using this tool, you acknowledge that you understand this disclaimer and agree that LongtermTrends and its affiliates are not liable for any losses or damages arising from your use of or reliance on this information.</p>
+                     <p class="mt-4"><a href="/privacy-policy/" class="text-yellow-900 underline hover:text-yellow-700">Privacy Policy</a> · <a href="/terms-of-use/" class="text-yellow-900 underline hover:text-yellow-700">Terms of Use</a></p>
+                  </div>
+               </div>
+            </div>
+         </div>
+    </div>
+</section>
+
+<!-- Scripts -->
+<script src="{% static 'my_app/js/landing-page/script.js' %}"></script>
+
+<!-- Car Agent (Chatbox) -->
+{% if request.user.is_authenticated %}
+<script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+<script src="{% static 'my_app/js/n8n-brandable-chatbox.js' %}"></script>
+<script>
+    // Initialize Car Agent
+    (function() {
+        // ALWAYS use production API as requested
+        // Using 'car.longtermtrends.com' based on standard naming convention, 
+        // to be confirmed in DEPLOY_COOLIFY.md
+        // NOTE: If using Coolify default domain (e.g. sslip.io), update this URL!
+        const apiUrl = "https://car.longtermtrends.com/chat";
+        
+        const userData = {
+            email: "{{ request.user.email|default:''|escapejs }}",
+            name: "{{ request.user.first_name|default:request.user.username|escapejs }}",
+            id: "{{ request.user.id|default:''|escapejs }}"
+        };
+        
+        initAgent({
+            webhookUrl: apiUrl,
+            botName: "Car Coach",
+            welcomeMessage: "<i>Important Disclaimer: For Educational and Informational Purposes Only.</i><br><br>Hello! I am your Car Coach, an educational tool to help you understand how much car you can realistically afford. To start, what is your annual income (after taxes)?",
+            inputPlaceholder: "Type your message...",
+            brandColor: "#2563eb", // Blue-600
+            accentColor: "#3b82f6", // Blue-500
+            allowFileUploads: false,
+            storageKey: "car-agent-chatbox", // Unique storage key for Car Agent
+            user_email: userData.email,
+            user_name: userData.name,
+            user_id: userData.id,
+            feedbackUrl: "mailto:info@longtermtrends.net?subject=Car%20Agent%20Feedback",
+            onEvent: function(eventName, data) {
+                // Analytics
+                if (eventName === 'toggle' && data.open) {
+                    try {
+                        if (window.gtag) { gtag('event', 'chat_initiated', {'event_category': 'Car-Agent'}); }
+                    } catch(e) {}
+                }
+                if (eventName === 'message' && data.role === 'bot') {
+                    // Track engagement (any bot response)
+                    try {
+                        if (window.gtag) { gtag('event', 'chat_response_received', {'event_category': 'Car-Agent'}); }
+                    } catch(e) {}
+                }
+            }
+        });
+    })();
+</script>
+{% else %}
+<!-- Login Prompt for Non-Authenticated Users -->
+<div x-data="{ show: true }" x-show="show" class="fixed bottom-5 right-5 z-[1000] bg-white p-6 rounded-xl shadow-lg border border-gray-100 max-w-xs transition-opacity duration-300">
+    <div @click="show = false" class="absolute top-5 right-5 cursor-pointer">
+        <div class="h-7 w-7 flex justify-center items-center text-gray-500 p-2 -m-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+        </div>
+    </div>
+    <div class="flex items-start gap-4">
+        <!-- Agent Icon -->
+        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /> 
+                <!-- Changed icon to represent 'Affordability/Value' metaphor or Car, let's use a Car icon actually -->
+             </svg>
+        </div>
+        <!-- Switching to Car Icon for consistency -->
+        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0" style="margin-left:-4rem; background:white; z-index:10;">
+             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /> 
+             </svg>
+             <!-- Wait the SVG above is a heart? Let's fix the icon below in correct block -->
+        </div>
+         <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+             <!-- Using Home icon as placeholder if I cant find car, but let's try to mimic car path -->
+             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:none;">
+                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+             </svg>
+        </div>
+        
+        <div class="flex-1">
+            <h4 class="text-base font-bold text-gray-900 mb-1">Car Affordability Agent</h4>
+            <p class="text-sm text-gray-600 mb-4 leading-relaxed">Log in to check if you can afford your dream car.</p>
+            <div class="flex gap-3">
+                <button onclick="window.Alpine.store('signUpModal').isModalOpen = true; window.dispatchEvent(new CustomEvent('login-clicked'));" class="px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition">Log In</button>
+                <button onclick="window.Alpine.store('signUpModal').isModalOpen = true; window.dispatchEvent(new CustomEvent('signup-clicked'));" class="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-semibold rounded-lg hover:bg-gray-200 transition">Sign Up</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block footer %}
+{% include 'my_app/bootstrap/footer.html' %}
+{% endblock %}
