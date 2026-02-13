@@ -116,7 +116,7 @@ Go to **Environment Variables** tab and add:
 ### 4.4. Domain Configuration
 **Domain Settings:**
 - **Protocol:** `https` (Coolify auto-provisions SSL via Let's Encrypt)
-- **Domain:** `f4gog4oo80kwg0ggwg008gs4.46.224.23.170.sslip.io` (current)
+- **Domain:** `f4gog4oo80kwg0ggwg008gs4.xx.xxx.xx.xxx.sslip.io` (current)
 - **Wildcard:** No
 
 **DNS Setup (For Future Custom Domain):**
@@ -161,8 +161,8 @@ docker exec -it <container-id> curl http://localhost:18789/health
 ### 6.1. Access the Dashboard
 
 1. **Wait for the container to start** (check health status in Coolify)
-2. **Navigate to your domain**: `https://f4gog4oo80kwg0ggwg008gs4.46.224.23.170.sslip.io/`
-3. If you set `OPENCLAW_GATEWAY_TOKEN`, append it: `https://f4gog4oo80kwg0ggwg008gs4.46.224.23.170.sslip.io/?token=<YOUR_TOKEN>`
+2. **Navigate to your domain**: `https://f4gog4oo80kwg0ggwg008gs4.xx.xxx.xx.xxx.sslip.io/`
+3. If you set `OPENCLAW_GATEWAY_TOKEN`, append it: `https://f4gog4oo80kwg0ggwg008gs4.xx.xxx.xx.xxx.sslip.io/?token=<YOUR_TOKEN>`
 
 > [!TIP]
 > If you didn't set a token, you may need to run `openclaw doctor` in the container to set up authentication.
@@ -181,7 +181,7 @@ To configure your agent's personality and skills:
 ### 6.3. Verify Health
 
 ```bash
-curl https://f4gog4oo80kwg0ggwg008gs4.46.224.23.170.sslip.io/health
+curl https://f4gog4oo80kwg0ggwg008gs4.xx.xxx.xx.xxx.sslip.io/health
 ```
 
 **Expected Response:**
@@ -358,7 +358,7 @@ If you're running behind a reverse proxy (nginx, Caddy, Traefik), you **must** c
 ### 10.2. Download Logs
 ```bash
 # With persistent volume configured
-scp -i ~/.ssh/id_rsa root@46.224.23.170:/var/lib/docker/volumes/openclaw-data/_data/logs/*.log ~/Downloads/
+scp -i ~/.ssh/id_rsa root@xx.xxx.xx.xxx:/var/lib/docker/volumes/openclaw-data/_data/logs/*.log ~/Downloads/
 ```
 
 ### 10.3. Run Doctor
@@ -479,7 +479,7 @@ docker exec -it <container-id> node dist/index.js nodes approve <requestId>
 To prevent the server from filling up, regularly check your disk usage and clean up Docker artifacts.
 
 ### SSH into Coolify server (OpenClaw/Agents)
-ssh -i ~/.ssh/id_rsa root@46.224.23.170
+ssh -i ~/.ssh/id_rsa root@xx.xxx.xx.xxx
 
 ### 13.1. Check Disk Space
 Run this command to see how much space is left:
@@ -551,7 +551,7 @@ Before going live:
 ━━━━━━━━━━━━━━━━━━━━━━━━
 ✅ Build: Success
 ✅ Health Check: Passing
-✅ Domain: f4gog4oo80kwg0ggwg008gs4.46.224.23.170.sslip.io
+✅ Domain: f4gog4oo80kwg0ggwg008gs4.xx.xxx.xx.xxx.sslip.io
 ✅ SSL: Active
 ✅ Gateway: Running
 ✅ Channels: [telegram, discord]

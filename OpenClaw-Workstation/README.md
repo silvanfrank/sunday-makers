@@ -59,13 +59,13 @@ Set these in Coolify's Environment Variables tab:
 
 | Service | Port | Domain |
 |---------|------|----------------|
-| `workstation` | 3000 | `https://w04ko4scws0sosogooocs8s8.46.224.23.170.sslip.io` |
+| `workstation` | 3000 | `https://w04ko4scws0sosogooocs8s8.xx.xxx.xx.xxx.sslip.io` |
 
 > OpenClaw is now accessed from *inside* the desktop at `localhost:18789`, not via a separate domain.
 
 ## Usage
 
-1. **Access the Desktop:** Open [Workstation URL](https://w04ko4scws0sosogooocs8s8.46.224.23.170.sslip.io) in your browser.
+1. **Access the Desktop:** Open [Workstation URL](https://w04ko4scws0sosogooocs8s8.xx.xxx.xx.xxx.sslip.io) in your browser.
    - **Username:** `abc`
    - **Password:** [Your `WORKSTATION_PASSWORD`]
 2. **Open Firefox** (pre-installed in the desktop).

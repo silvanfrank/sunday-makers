@@ -109,7 +109,7 @@ You only need **one domain** for the workstation:
 
 **Service: workstation**
 - **Port:** `3000`
-- **Domain:** `https://w04ko4scws0sosogooocs8s8.46.224.23.170.sslip.io`
+- **Domain:** `https://w04ko4scws0sosogooocs8s8.xx.xxx.xx.xxx.sslip.io`
 
 > OpenClaw is accessed from *inside* the desktop at `localhost:18789`, not via a separate external domain.
 
@@ -130,7 +130,7 @@ You only need **one domain** for the workstation:
 
 1. **Navigate to your workstation domain:**
    ```
-   https://w04ko4scws0sosogooocs8s8.46.224.23.170.sslip.io
+   https://w04ko4scws0sosogooocs8s8.xx.xxx.xx.xxx.sslip.io
    ```
 
 2. **Login Information:**
